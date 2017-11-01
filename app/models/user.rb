@@ -1,9 +1,13 @@
 class User < ActiveRecord::Base
   include BCrypt
 
-  validates :first_name, :last_name, :username, :email, presence: true
+  validates :username, :email, presence: true
   validates :username, :email, uniqueness: true
   validate :validate_password
+
+  has_many :animals, foreign_key: :uploaded_owner_id
+  has_many :nuzzles, foreign_key: :owner_id
+  has_many :nuzzled_animals, through: :nuzzles, source: :animal
 
   def password
     @password ||= Password.new(encrypted_password)
