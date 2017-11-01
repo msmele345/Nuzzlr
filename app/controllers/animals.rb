@@ -1,45 +1,45 @@
 # RESTFUL Routing:
 # display all things
-get '/things' do
-  erb :"/things/index"
+get '/animals' do
+  erb :"/animals/index"
 end
 
 # render a new thing form
-get '/things/new' do
+get '/animals/new' do
   authenticate!
-  erb :"/things/new"
+  erb :"/animals/new"
 end
 
 # create a new thing
-post '/things' do
+post '/animals' do
   authenticate!
-  redirect '/things'
+  redirect '/animals'
 end
 
 # display a specific thing
-get '/things/:id' do
-  erb :"/things/show"
+get '/animals/:id' do
+  erb :"/animals/show"
 end
 
 # render an edit form for a thing
-get '/things/:id/edit' do
+get '/animals/:id/edit' do
   authenticate!
   authorized!
-  erb :"/things/:id/edit"
+  erb :"/animals/:id/edit"
 end
 
 # update a thing
-put '/things/:id' do
+put '/animals/:id' do
   authenticate!
   authorized!
-  redirect "/things/#{params[:id]}"
+  redirect "/animals/#{params[:id]}"
 end
 
 # delete a specific thing
-delete '/things/:id' do
+delete '/animals/:id' do
   authenticate!
   authorized!
-  redirect '/things'
+  redirect '/animals'
 end
 
 
