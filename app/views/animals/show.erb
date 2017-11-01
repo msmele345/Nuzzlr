@@ -1,0 +1,26 @@
+<h2 class="user-show-header"><%= @animal.name %> 's Profile Page</h2>
+
+
+
+<div class="user-box">
+  <h3 class="animal-show-name"><%= @animal.name %>'s Details</h3>
+  <ul>
+    <li>
+         <p><%= @animal.species %> </p>
+         <img src="<%= @animal.image_url%>">
+         <h4>Uploaded by:</h4>
+         <p><%= @animal.uploaded_owner.username %></p>
+         <h4>Total Nuzzles:</h4>
+         <p><%= @animal.nuzzle_count%></p>
+       </li>
+    </ul>
+</div>
+
+
+<div class="nuzzle-animal" align="center">
+  <% if logged_in?  %>
+  <form action="/animals/<%= @animal.id %>/nuzzles" method="post">
+    <input type="submit" value="Nuzzle!" />
+  </form>
+<% end %>
+</div>

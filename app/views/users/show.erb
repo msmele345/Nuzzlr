@@ -1,2 +1,25 @@
-<h3><%= @user.first_name %> <%= @user.last_name %>'s Profile Page</h3>
+<h2 class="user-show-header"><%= @user.username %> 's Profile Page</h2>
+
+
+
+<div class="user-box">
+  <h3><%= @user.username %> 's Uploaded Animals:</h3>
+  <ul>
+    <% @user.animals.each do |animal| %>
+
+    <li>
+        <a href="/animals/<%= animal.id %>"><%= animal.name %></a>
+         <p><%= animal.species %> </p>
+         <img src="<%= animal.image_url%>">
+
+          <form method="POST" action="/animals/<%= animal.id %>">
+          <input type="hidden" name="_method" value="DELETE" />
+          <input class="delete-button"type="submit" value="Remove Animal Upload">
+
+        </form>
+       </li>
+
+    <% end %>
+    </ul>
+</div>
 

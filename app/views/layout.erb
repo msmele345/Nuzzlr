@@ -14,6 +14,8 @@
 
 <link href="https://fonts.googleapis.com/css?family=Lobster|Open+Sans|Roboto" rel="stylesheet">
 
+<link href="https://fonts.googleapis.com/css?family=Indie+Flower|Lato|Oswald|Roboto" rel="stylesheet">
+
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="/js/application.js"></script>
 
@@ -27,7 +29,7 @@
       <nav>
         <ul>
           <li>
-            <a href="/users/<%= current_user.id %>">Hello, <%= current_user.first_name %></a>
+            <a href="/users/<%= current_user.id %>">Hello, <%= current_user.username %></a>
           </li>
           <li class="no-style-button">
             <form method="POST" action="/sessions">
@@ -48,7 +50,7 @@
         </ul>
       </nav>
       <% end %>
-
+      <h1 class="main-header">Nuzzlr</h1>
     </div>
   </header>
   <main class="container">
