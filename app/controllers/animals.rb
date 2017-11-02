@@ -24,20 +24,12 @@ post '/animals' do
   end
 end
 
-# post '/animals/:id/nuzzles' do
-#   new_nuzzle = params[:nuzzle_count].to_i
-#   @animal = Animal.find(params[:id])
-#   ep new_nuzzle
-
-#   # @total_nuzzles = @animal.nuzzle_count.reduce(:+)
-#   ep @animal
-#   redirect "/animals/#{params[:id]}"
-# end
-
 
 # show
 get '/animals/:id' do
   @animal = Animal.find_by(id: params[:id])
+  @nuzzle = Nuzzle.find_by(animal_id: params[:id])
+  ep @nuzzle
   erb :"/animals/show"
 end
 
