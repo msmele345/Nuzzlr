@@ -1,0 +1,17 @@
+<h1 class="main-header">Click on any Animal for more detail</h1>
+
+
+
+<div class="user-box">
+  <h3>All the Animals:</h3>
+  <ul>
+    <% @animals.each do |animal| %>
+
+    <li>
+        <a href="/animals/<%= animal.id %>"><%= animal.name %></a>
+         <p><%= animal.species %> </p>
+         <img src="<%= animal.image_url%>">
+       </li>
+    <% end %>
+    </ul>
+</div>

@@ -1,0 +1,43 @@
+<h2 class="user-show-header"><%= @animal.name %> 's Profile Page</h2>
+
+
+
+<div class="user-box">
+  <h3 class="animal-show-name"><%= @animal.name %>'s Details</h3>
+  <ul>
+    <li>
+         <p><%= @animal.species %> </p>
+         <img src="<%= @animal.image_url%>">
+         <h4>Uploaded by:</h4>
+         <p><%= @animal.uploaded_owner.username %></p>
+         <h4>Total Nuzzles:</h4>
+         <p><%= @animal.nuzzle_count.to_i %></p>
+       </li>
+    </ul>
+</div>
+
+<div align="center">
+   <% if logged_in? && @animal.uploaded_owner_id == current_user.id  %>
+   <a href="/animals/<%= @animal.id %>/edit">
+    <button>Edit this upload</button>
+  </a>
+  <% end %>
+</div><br><br>
+
+<div align="center">
+   <% if logged_in? && @animal.uploaded_owner_id == current_user.id  %>
+  <form id="delete-button" method="POST" action="/animals/<%= @animal.id %>">
+    <input type="hidden" name="_method" value="DELETE" />
+    <input type="submit" class="button" value="delete" />
+  </form>
+  <% end %>
+</div><br><br>
+
+<div class="nuzzle-animal" align="center">
+  <% if logged_in?  %>
+  <form action="/animals/<%= @animal.id %>/nuzzles" method="post">
+    <input type="hidden" name="nuzzle_count" value="1">
+    <input type="submit" value="Nuzzle!" />
+  </form>
+<% end %>
+</div>

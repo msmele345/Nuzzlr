@@ -1,44 +1,71 @@
 # RESTFUL Routing:
 # display all things
+##index
 get '/animals' do
+  @animals = Animal.all
   erb :"/animals/index"
 end
 
-# render a new thing form
+##create
 get '/animals/new' do
-  authenticate!
   erb :"/animals/new"
 end
 
-# create a new thing
 post '/animals' do
   authenticate!
-  redirect '/animals'
+  @animal = Animal.new(params[:animal])
+  @animal.uploaded_owner_id = current_user.id
+
+  if @animal.save
+    redirect "/animals/#{@animal.id}"
+  else
+    @errors = @entry.errors.full_messages
+    erb :'animals/new'
+  end
 end
 
-# display a specific thing
+# post '/animals/:id/nuzzles' do
+#   new_nuzzle = params[:nuzzle_count].to_i
+#   @animal = Animal.find(params[:id])
+#   ep new_nuzzle
+
+#   # @total_nuzzles = @animal.nuzzle_count.reduce(:+)
+#   ep @animal
+#   redirect "/animals/#{params[:id]}"
+# end
+
+
+# show
 get '/animals/:id' do
+  @animal = Animal.find_by(id: params[:id])
   erb :"/animals/show"
 end
 
-# render an edit form for a thing
+##edit
 get '/animals/:id/edit' do
-  authenticate!
-  authorized!
-  erb :"/animals/:id/edit"
+  @animal = Animal.find_by(id: params[:id])
+  erb :"/animals/edit"
 end
 
 # update a thing
 put '/animals/:id' do
   authenticate!
-  authorized!
+  @animal = Animal.find(params[:id])
+  ep @animal
+  # authorize!(@animal.uploaded_owner_id)
+  @animal.update_attributes(params[:animal])
+
+
   redirect "/animals/#{params[:id]}"
 end
 
 # delete a specific thing
 delete '/animals/:id' do
   authenticate!
-  authorized!
+  @animal = Animal.find(params[:id])
+
+  @animal.destroy
+
   redirect '/animals'
 end
 
