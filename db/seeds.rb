@@ -10,13 +10,13 @@ end
 
 
 10.times do
-  animal = {:name => Faker::Name.first_name, :species => Faker::Cat.breed, :image_url => Faker::Avatar.image("my-own-slug", "50x50"), :uploaded_owner_id => rand(1..5), :nuzzle_count => rand(1..50)}
+  animal = {:name => Faker::Name.first_name, :species => Faker::Cat.breed, :image_url => Faker::Avatar.image("my-own-slug", "50x50"), :uploaded_owner_id => rand(1..5)}
 
   Animal.create!(animal)
 end
 
 10.times do
-  nuzzle = {:owner_id => rand(1..5), :animal_id => rand(1..5)}
+  nuzzle = {:owner_id => rand(1..5), :animal_id => rand(1..5), :nuzzle_count => rand(1..50)}
 
   Nuzzle.create!(nuzzle)
 end
