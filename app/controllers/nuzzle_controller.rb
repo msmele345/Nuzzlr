@@ -1,11 +1,10 @@
 post '/animals/:id/nuzzles' do
-  new_nuzzle = params[:nuzzle_count].to_i
-  ep params
-  p "************"
   @animal = Animal.find(params[:id])
-  @nuzzle = Nuzzle.new(:owner_id => current_user.id, :animal_id => @animal.id, :nuzzle_count => @animal.nuzzles.count)
+  new_nuzzle = params[:nuzzle_count].to_i
+  @total = @animal.nuzzles.count + 1
+  @nuzzle = Nuzzle.new(:owner_id => current_user.id, :animal_id => @animal.id, :nuzzle_count => @total)
 
-  ep @nuzzle
+  @animal.nuzzles << @nuzzle
 
   redirect "/animals/#{params[:id]}"
 end

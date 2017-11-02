@@ -28,6 +28,8 @@ end
 # show
 get '/animals/:id' do
   @animal = Animal.find_by(id: params[:id])
+  @nuzzle = Nuzzle.find_by(animal_id: params[:id])
+  ep @nuzzle
   erb :"/animals/show"
 end
 
